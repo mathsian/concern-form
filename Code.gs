@@ -35,8 +35,9 @@ function onFormSubmit(e) {
   // get the response items
   var responses = e.response.getItemResponses();
   var student_email = responses[0].getResponse();
-  var level = responses[1].getResponse();
-  var reason = responses[2].getResponse();
+  var category = responses[1].getResponse();
+  var discrimination = responses[2].getResponse();
+  var reason = responses[3].getResponse();
   var respondent = e.response.getRespondentEmail();
   var date = Date();
   
@@ -66,21 +67,23 @@ function onFormSubmit(e) {
     var student_name = name_range[i][0];
     //var reportid = reportid_range[i][0];
   } else {
-    MailApp.sendEmail("datareporting@ada.ac.uk","Concern form failure", "Failed for "+student_email+" by "+respondent,{noReply: true});
+    MailApp.sendEmail("ian@ada.ac.uk","Concern form failure", "Failed for "+student_email+" by "+respondent,{noReply: true});
     return;
   }
   
   // send email
   var templ = HtmlService.createTemplateFromFile("concern email template.html");
   templ.concern = {student_name: student_name,
-                 level: level,
+                 category: category,
+                 discrimination: discrimination,
                  respondent: respondent,
                  reason: reason};
   var msg = templ.evaluate().getContent();
-  MailApp.sendEmail({to: team_email,
-                     subject: "Concern",
-                     htmlBody: msg,
-                     noReply: true});
+  MailApp.sendEmail({
+    to: team_email,
+    subject: "Concern",
+    htmlBody: msg,
+    noReply: true});
   
 }
 
