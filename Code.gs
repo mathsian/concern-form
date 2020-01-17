@@ -67,7 +67,7 @@ function onFormSubmit(e) {
     var student_name = name_range[i][0];
     //var reportid = reportid_range[i][0];
   } else {
-    MailApp.sendEmail("ian@ada.ac.uk","Concern form failure", "Failed for "+student_email+" by "+respondent,{noReply: true});
+    MailApp.sendEmail("dataandreporting@ada.ac.uk","Concern form failure", "Failed for "+student_email+" by "+respondent,{noReply: true});
     return;
   }
   
