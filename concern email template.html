@@ -4,9 +4,18 @@
     <base target="_top">
   </head>
   <body>
-    <h2>Concern</h2>
-    <p>We wanted to let you know that a level <?= concern.level ?> concern has been raised by <?= concern.respondent ?> about <?= concern.student_name ?>'s conduct:</p>
+    <h2><?= concern.category ?></h2>
+    <p>We wanted to let you know that a concern has been raised by <?= concern.respondent ?> about <?= concern.student_name ?>'s conduct:</p>
     <quote><?= concern.reason ?></quote>
+    <? if (concern.discrimination.indexOf("N/A") == -1) { ?>
+    <h3>Discrimination</h3>
+    <p>Discrimination has been noted in the form of</p>
+    <ul>
+    <? for each (d in concern.discrimination) { ?>
+    <li><?= d ?></li>
+    <? } ?>
+    </ul>
+    <? } ?>
     <h3>Ada, the National College for Digital Skills</h3>
     <h2>Think. Create. Develop</h2>
   </body>
